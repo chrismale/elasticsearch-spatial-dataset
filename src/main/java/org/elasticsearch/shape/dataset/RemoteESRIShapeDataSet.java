@@ -1,6 +1,5 @@
 package org.elasticsearch.shape.dataset;
 
-import com.google.common.io.ByteStreams;
 import com.spatial4j.core.shape.Shape;
 import org.elasticsearch.ElasticSearchIllegalArgumentException;
 import org.elasticsearch.ElasticSearchIllegalStateException;
