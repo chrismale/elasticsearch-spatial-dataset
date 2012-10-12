@@ -1,4 +1,4 @@
-package org.elasticsearch.shape.dataset;
+package org.elasticsearch.shape.dataset.parsers;
 
 import com.linuxense.javadbf.DBFField;
 import com.linuxense.javadbf.DBFReader;
@@ -11,6 +11,7 @@ import com.vividsolutions.jts.geom.LinearRing;
 import com.vividsolutions.jts.geom.Polygon;
 import org.elasticsearch.ElasticSearchIllegalArgumentException;
 import org.elasticsearch.ElasticSearchParseException;
+import org.elasticsearch.shape.dataset.GeoShapeConstants;
 
 import java.io.IOException;
 import java.io.InputStream;

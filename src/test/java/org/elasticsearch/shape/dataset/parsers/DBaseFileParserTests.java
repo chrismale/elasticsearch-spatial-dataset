@@ -1,14 +1,20 @@
-package org.elasticsearch.shape.dataset.dbf;
+package org.elasticsearch.shape.dataset.parsers;
 
 import org.elasticsearch.shape.dataset.ByteStreams;
 import org.testng.annotations.Test;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.util.Iterator;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Tests for {@link DBaseFileParser}
+ */
 public class DBaseFileParserTests {
 
     @Test

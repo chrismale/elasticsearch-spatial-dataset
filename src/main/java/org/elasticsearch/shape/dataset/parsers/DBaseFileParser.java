@@ -1,4 +1,4 @@
-package org.elasticsearch.shape.dataset.dbf;
+package org.elasticsearch.shape.dataset.parsers;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

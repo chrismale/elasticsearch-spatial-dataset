@@ -5,6 +5,7 @@ import org.elasticsearch.ElasticSearchIllegalArgumentException;
 import org.elasticsearch.ElasticSearchIllegalStateException;
 import org.elasticsearch.common.io.Closeables;
 import org.elasticsearch.common.xcontent.XContentBuilder;
+import org.elasticsearch.shape.dataset.parsers.ESRIShapeFileParser;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

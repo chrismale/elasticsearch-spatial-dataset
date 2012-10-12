@@ -1,4 +1,4 @@
-package org.elasticsearch.shape.dataset;
+package org.elasticsearch.shape.dataset.parsers;
 
 import com.spatial4j.core.shape.Shape;
 import org.testng.annotations.Test;
@@ -13,6 +13,9 @@ import java.util.Map;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * Tests for {@link ESRIShapeFileParser}
+ */
 public class ESRIShapeFileParserTests {
 
     @Test
