@@ -72,17 +72,6 @@ public class ESRIShapeFileParser {
         }
     }
 
-    public static List<Map<String, Object>> parseFiles(ByteBuffer shpBuffer, InputStream dbfFile) throws IOException {
-        List<Shape> shapes = parseShpFile(shpBuffer);
-        List<Map<String, Object>> shapeMetadata = parseDBFFile(dbfFile);
-
-        for (int i = 0; i < shapes.size(); i++) {
-            shapeMetadata.get(i).put("shape", shapes.get(i));
-        }
-
-        return shapeMetadata;
-    }
-
     /**
      * Parses the SHP file, extracting the Shapes contained
      *

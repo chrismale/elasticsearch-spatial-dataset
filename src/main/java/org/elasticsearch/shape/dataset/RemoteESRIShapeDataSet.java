@@ -20,19 +20,30 @@ import java.util.zip.ZipInputStream;
 
 import static org.elasticsearch.common.collect.Lists.newArrayList;
 
+/**
+ * {@link ShapeDataSet} implementation supporting remotely archieved ESRI Shapefile bundles
+ * such as those used by http://www.naturalearthdata.com
+ */
 public class RemoteESRIShapeDataSet implements ShapeDataSet {
 
     public static final ShapeDataSet NATURAL_EARTH_DATA_COUNTRIES = new RemoteESRIShapeDataSet("natural_earth_data_cities",
             "http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/110m/cultural/110m-admin-0-countries.zip",
             "NAME");
 
-    private final String SHP_SUFFIX = ".shp";
-    private final String DBF_SUFFIX = ".dbf";
+    private static final String SHP_SUFFIX = ".shp";
+    private static final String DBF_SUFFIX = ".dbf";
 
     private final String id;
     private final URL url;
     private final String nameField;
 
+    /**
+     * Constructs a new RemoteESRIShapeDataSet which will retrieve from the given URL
+     *
+     * @param id ID for the DataSet
+     * @param url URL to retrieve the shapefile data from
+     * @param nameField Name of the metadata field that has the Shape names
+     */
     public RemoteESRIShapeDataSet(String id, String url, String nameField) {
         this.id = id;
         this.nameField = nameField;
@@ -44,10 +55,16 @@ public class RemoteESRIShapeDataSet implements ShapeDataSet {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String id() {
         return id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public Iterator<ShapeData> shapeData() throws IOException {
         InputStream urlInputStream = null;
         ZipInputStream zipInputStream = null;
@@ -100,6 +117,9 @@ public class RemoteESRIShapeDataSet implements ShapeDataSet {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void addMetadata(XContentBuilder contentBuilder) throws IOException {
         contentBuilder.field("source_url", url.toExternalForm());
     }

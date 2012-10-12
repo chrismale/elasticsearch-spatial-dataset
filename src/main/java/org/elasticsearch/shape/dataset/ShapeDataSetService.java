@@ -18,6 +18,9 @@ import java.util.*;
 import static org.elasticsearch.common.collect.Lists.newArrayList;
 import static org.elasticsearch.common.collect.Maps.newHashMap;
 
+/**
+ * Service that facilitates indexing the Shapes from {@link ShapeDataSet}s
+ */
 public class ShapeDataSetService extends AbstractComponent {
 
     private final Client client;
@@ -35,19 +38,43 @@ public class ShapeDataSetService extends AbstractComponent {
         register(RemoteESRIShapeDataSet.NATURAL_EARTH_DATA_COUNTRIES);
     }
 
+    /**
+     * Registers the given {@link ShapeDataSet} with this service
+     *
+     * @param dataSet DataSet to register
+     */
     public void register(ShapeDataSet dataSet) {
         dataSets.add(dataSet);
         dataSetsById.put(dataSet.id(), dataSet);
     }
 
+    /**
+     * @return Returns an unmodifiable view of the current registered ShapeDataSets
+     */
     public List<ShapeDataSet> dataSets() {
         return Collections.unmodifiableList(dataSets);
     }
 
+    /**
+     * Returns the ShapeDataSet with the given ID
+     *
+     * @param id ID of the ShapeDataSet to retrieve
+     * @return ShapeDataSet with the ID, or {@code null} if no ShapeDataSet with the ID
+     *         is currently registered
+     */
     public ShapeDataSet dataSet(String id) {
         return dataSetsById.get(id);
     }
 
+    /**
+     * Indexes the data from the given ShapeDataSet, into the given index and type
+     *
+     * @param dataSet ShapeDataSet whose data will be indexed
+     * @param index Name of the index where the data will be indexed
+     * @param type Name of the index type where the data will be indexed
+     * @param batchSize The maximum batch size for indexing requests
+     * @param listener Listener for success and failure of the indexing
+     */
     public void index(
             final ShapeDataSet dataSet,
             final String index,
@@ -68,7 +95,7 @@ public class ShapeDataSetService extends AbstractComponent {
         });
     }
 
-    public int index(ShapeDataSet dataSet, String index, String type, int batchSize) throws IOException {
+    private int index(ShapeDataSet dataSet, String index, String type, int batchSize) throws IOException {
         Iterator<ShapeData> shapeDataIterator = dataSet.shapeData();
 
         int batchCount = 0;
@@ -121,7 +148,7 @@ public class ShapeDataSetService extends AbstractComponent {
         }
     }
 
-    public static interface Fields {
+    private static interface Fields {
         public final String SHAPE = "shape";
         public final String METADATA = "metadata";
         public final String DATASET_ID = "data_set_id";
